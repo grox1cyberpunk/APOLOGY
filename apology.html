@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Chikooooo 🧸❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff758f;
+            --accent: #ffb3c1;
+            --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c1 100%);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-dark: #3a0ca3;
+            --text-main: #2b2d42;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-main);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        /* Floating Background Hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            background: rgba(255, 77, 109, 0.2);
+            width: 20px;
+            height: 20px;
+            transform: rotate(45deg);
+            animation: floatUp 8s infinite linear;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 77, 109, 0.2);
+        }
+
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { top: 0; left: -10px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(45deg) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(45deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 650px;
+            margin: 20px auto;
+        }
+
+        .stage {
+            display: none;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            animation: fadeIn 0.6s ease-in-out forwards;
+        }
+
+        .stage.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #4a4e69;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 77, 109, 0.6);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #ffe5ec;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            width: 10%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
+        }
+
+        /* Stage 1: Teddy Delivery Animation */
+        .teddy-scene {
+            position: relative;
+            height: 220px;
+            margin: 20px 0;
+            background: linear-gradient(to bottom, #fff0f3, #ffe3e8);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .teddy {
+            font-size: 5rem;
+            animation: bounceTeddy 2s infinite ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes bounceTeddy {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .gift-box {
+            position: absolute;
+            font-size: 2.5rem;
+            bottom: 20px;
+            animation: slideInGift 1.5s ease forwards;
+        }
+
+        @keyframes slideInGift {
+            0% { transform: translateX(-150px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .treats-tray {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .treat-badge {
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #d90429;
+            border: 1px solid #ffb3c1;
+        }
+
+        /* Stage 2: Interactive Slider / Mood Meter */
+        .slider-box {
+            margin: 25px 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            height: 8px;
+            border-radius: 5px;
+            background: #ffe5ec;
+            outline: none;
+            margin: 15px 0;
+        }
+
+        /* Stage 3: Memory Quiz */
+        .quiz-option {
+            background: #fff;
+            border: 2px solid #ffb3c1;
+            padding: 12px 20px;
+            border-radius: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .quiz-option:hover {
+            background: #ffe5ec;
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .quiz-option.correct {
+            background: #d8f3dc;
+            border-color: #52b788;
+            color: #1b4332;
+        }
+
+        /* Stage 4: Compliment Jar & Note */
+        .textarea-box {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #ffb3c1;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+            background: #fff;
+            margin-bottom: 15px;
+        }
+
+        .textarea-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 77, 109, 0.2);
+        }
+
+        /* Stage 5: Scratch Cards */
+        .scratch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .scratch-card {
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+            color: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .scratch-card.revealed {
+            background: #fff;
+            color: var(--text-dark);
+            border: 2px dashed var(--primary);
+            transform: scale(0.98);
+        }
+
+        /* Stage 6: Heart Catching Mini Game */
+        .game-area {
+            position: relative;
+            height: 250px;
+            background: #fff0f3;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            cursor: crosshair;
+            border: 2px dashed #ffb3c1;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-30px); }
+            100% { transform: translateY(270px); }
+        }
+
+        /* Stage 7: Final Question & Escaping No Button */
+        .final-buttons {
+            position: relative;
+            height: 120px;
+            margin-top: 20px;
+        }
+
+        #yesBtn {
+            position: absolute;
+            left: 20%;
+            top: 20px;
+            font-size: 1.3rem;
+            padding: 15px 40px;
+            z-index: 10;
+        }
+
+        #noBtn {
+            position: absolute;
+            right: 20%;
+            top: 20px;
+            background: #adb5bd;
+            box-shadow: none;
+            transition: 0.1s ease;
+        }
+
+        /* Certificate */
+        .certificate {
+            background: #fff;
+            border: 8px double var(--primary);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .certificate h3 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- STAGE 1: Welcome & Teddy Delivery -->
+        <div class="stage active" id="stage1">
+            <h1>Hey Chikooooo... 🧸❤️</h1>
+            <p>I know things have been heavy between us, and I wanted to make something special just for you. Take a deep breath, relax, and walk through this little world I built straight from my heart.</p>
+            
+            <div class="teddy-scene">
+                <div class="gift-box">🎁</div>
+                <div class="teddy">🧸</div>
+            </div>
+            
+            <p>Your delivery has arrived! Look what your teddy bear brought you:</p>
+            <div class="treats-tray">
+                <div class="treat-badge">🍫 Choki Choki</div>
+                <div class="treat-badge">⭐ Cadbury 5 Star</div>
+                <div class="treat-badge">🌰 Nutella Jar</div>
+            </div>
+
+            <button class="btn" onclick="nextStage()">Open Your Surprise ➔</button>
+        </div>
+
+        <!-- STAGE 2: Mood & Feelings Check-in -->
+        <div class="stage" id="stage2">
+            <h1>How are you feeling right now?</h1>
+            <p>Move the slider below to let me know your current mood index:</p>
+            
+            <div class="slider-box">
+                <input type="range" id="moodSlider" min="1" max="100" value="30" oninput="updateMoodText()">
+                <p id="moodText" style="font-weight: 600; color: var(--primary); margin-top: 10px;">A little upset / skeptical 🥺</p>
+            </div>
+
+            <p style="font-size: 0.95rem;">Whatever you're feeling right now is completely valid, Chikooooo. Let's make it better together.</p>
+            <button class="btn" onclick="nextStage()">Continue Journey ➔</button>
+        </div>
+
+        <!-- STAGE 3: Our Sweet Memory Trivia -->
+        <div class="stage" id="stage3">
+            <h1>Quick Memory Check! 💭</h1>
+            <p>Let's see if you remember our favorite little moments together. Answer this:</p>
+            
+            <p style="font-weight: 600; color: var(--text-dark);">What is the one nickname I love calling you the most?</p>
+            
+            <div class="quiz-option" onclick="selectAnswer(this, false)">A) Sweetheart</div>
+            <div class="quiz-option" onclick="selectAnswer(this, true)">B) Chikooooo 🥰</div>
+            <div class="quiz-option" onclick="selectAnswer(this, false)">C) Bestie</div>
+
+            <div id="quizFeedback" style="margin-top: 15px; font-weight: 600; min-height: 30px;"></div>
+            <button class="btn" id="quizNextBtn" style="display: none; margin-top: 15px;" onclick="nextStage()">Next Step ➔</button>
+        </div>
+
+        <!-- STAGE 4: Interactive Letter & Confession -->
+        <div class="stage" id="stage4">
+            <h1>From My Heart to Yours ✨</h1>
+            <p>Chikooooo, you mean the absolute world to me. You are my safe space, my happiness, and the brightest part of my day. I'm truly sorry for anything that hurt you or made you feel unheard.</p>
+            
+            <p style="text-align: left; font-size: 0.95rem; margin-bottom: 10px; font-weight: 600;">Want to type back how you're feeling right now? (Optional):</p>
+            <textarea class="textarea-box" placeholder="Type what's on your mind here, Chikooooo... I'm reading every word."></textarea>
+
+            <button class="btn" onclick="nextStage()">Read My Promises ➔</button>
+        </div>
+
+        <!-- STAGE 5: Scratch-Off Promise Cards -->
+        <div class="stage" id="stage5">
+            <h1>Tap to Reveal My Promises 💌</h1>
+            <p>Tap each card below to see what I promise you from today onwards:</p>
+
+            <div class="scratch-grid">
+                <div class="scratch-card" onclick="revealCard(this, 'I promise to always be completely honest with you, no matter what.')">Card 1 🔓<br><small>(Tap to open)</small></div>
+                <div class="scratch-card" onclick="revealCard(this, 'I promise to always stand by your side and defend you proudly.')">Card 2 🔓<br><small>(Tap to open)</small></div>
+                <div class="scratch-card" onclick="revealCard(this, 'I promise to listen without getting defensive and value your feelings.')">Card 3 🔓<br><small>(Tap to open)</small></div>
+                <div class="scratch-card" onclick="revealCard(this, 'I promise to shower you with unlimited Choki Choki & Nutella!')">Card 4 🔓<br><small>(Tap to open)</small></div>
+            </div>
+
+            <button class="btn" style="margin-top: 20px;" onclick="nextStage()">Next Challenge ➔</button>
+        </div>
+
+        <!-- STAGE 6: Catching Hearts Mini Game -->
+        <div class="stage" id="stage6">
+            <h1>Catch 5 Hearts for Forgiveness! 💕</h1>
+            <p>Tap the floating hearts as fast as they appear to collect them all (<span id="heartCount">0</span>/5):</p>
+
+            <div class="game-area" id="gameArea"></div>
+            <button class="btn" id="gameNextBtn" style="display: none; margin-top: 15px;" onclick="nextStage()">Claim Your Reward ➔</button>
+        </div>
+
+        <!-- STAGE 7: The Final Question -->
+        <div class="stage" id="stage7">
+            <h1>Chikooooo... Can you forgive me? 🥺❤️</h1>
+            <p>I know I messed up, but I love you more than words can say. Can we press the reset button and smile together again?</p>
+            
+            <div class="final-buttons">
+                <button class="btn" id="yesBtn" onclick="celebrateLove()">YES, I Forgive You! 🥰</button>
+                <button class="btn" id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No 🙈</button>
+            </div>
+        </div>
+
+        <!-- STAGE 8: Success Celebration & Certificate -->
+        <div class="stage" id="stage8">
+            <h1>Yayyyyy! 🎉❤️</h1>
+            <p>Thank you for giving us another chance, my gorgeous Chikooooo. I promise to cherish you every single day.</p>
+            
+            <div class="certificate">
+                <h3>Official Certificate of Forgiveness</h3>
+                <p style="margin-top: 15px;">This certificate proudly proves that</p>
+                <h2 style="color: var(--primary); margin: 5px 0;">Siddhi (Chikooooo)</h2>
+                <p>has officially forgiven her favorite person and unlocked unlimited cuddles, Choki Choki, Cadbury 5 Star, and endless love! 🧸✨</p>
+            </div>
+
+            <p style="font-weight: 600; color: var(--primary);">Take a screenshot of this and send it to me right now! I love you so much! ❤️</p>
+        </div>
+
+    </div>
+
+    <script>
+        let currentStage = 1;
+        const totalStages = 8;
+
+        function updateProgress() {
+            const progress = (currentStage / totalStages) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function nextStage() {
+            document.getElementById('stage' + currentStage).classList.remove('active');
+            currentStage++;
+            if(currentStage <= totalStages) {
+                document.getElementById('stage' + currentStage).classList.add('active');
+                updateProgress();
+                if(currentStage === 6) {
+                    startGame();
+                }
+            }
+        }
+
+        // Floating background hearts generator
+        const heartsContainer = document.getElementById('floatingHearts');
+        for(let i=0; i<15; i++) {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = Math.random() * 100 + 'vh';
+            h.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            h.style.animationDelay = (Math.random() * 5) + 's';
+            heartsContainer.appendChild(h);
+        }
+
+        // Mood slider text updater
+        function updateMoodText() {
+            const val = document.getElementById('moodSlider').value;
+            const text = document.getElementById('moodText');
+            if(val < 30) text.innerText = "Still a little upset / skeptical 🥺";
+            else if(val < 70) text.innerText = "Warming up and listening... 🙂";
+            else text.innerText = "Almost ready to smile and forgive! 🥰";
+        }
+
+        // Quiz handler
+        function selectAnswer(el, isCorrect) {
+            const feedback = document.getElementById('quizFeedback');
+            if(isCorrect) {
+                el.classList.add('correct');
+                feedback.style.color = '#2b9348';
+                feedback.innerText = "Yay! You got it right, my Chikooooo! ❤️";
+                document.getElementById('quizNextBtn').style.display = 'inline-block';
+            } else {
+                feedback.style.color = '#d90429';
+                feedback.innerText = "Oops! Try again (Hint: It's option B)! 🧸";
+            }
+        }
+
+        // Scratch card reveal
+        function revealCard(card, text) {
+            card.classList.add('revealed');
+            card.innerHTML = text;
+        }
+
+        // Heart catching game logic
+        let heartsCaught = 0;
+        let gameInterval;
+        function startGame() {
+            heartsCaught = 0;
+            document.getElementById('heartCount').innerText = heartsCaught;
+            const area = document.getElementById('gameArea');
+            area.innerHTML = '';
+            
+            gameInterval = setInterval(() => {
+                if(heartsCaught >= 5) {
+                    clearInterval(gameInterval);
+                    return;
+                }
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * (area.offsetWidth - 40) + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                heart.onclick = () => {
+                    heartsCaught++;
+                    document.getElementById('heartCount').innerText = heartsCaught;
+                    heart.remove();
+                    if(heartsCaught >= 5) {
+                        document.getElementById('gameArea').innerHTML = "<h3 style='color: #2b9348; margin-top: 90px;'>All hearts collected successfully! 🎉</h3>";
+                        document.getElementById('gameNextBtn').style.display = 'inline-block';
+                    }
+                };
+                
+                area.appendChild(heart);
+                setTimeout(() => { if(heart.parentElement) heart.remove(); }, 4000);
+            }, 800);
+        }
+
+        // Escaping No button
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 80 - 40;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        // Final Celebration
+        function celebrateLove() {
+            nextStage();
+            // Trigger extra confetti / heart rain
+            for(let i=0; i<40; i++) {
+                const h = document.createElement('div');
+                h.className = 'heart';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.top = -10 + 'px';
+                h.style.background = '#ff4d6d';
+                h.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                heartsContainer.appendChild(h);
+            }
+        }
+    </script>
+</body>
+</html>
