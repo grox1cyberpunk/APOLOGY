@@ -3,479 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Siddhi (Chikooooo)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>For My Chikooooo 🧸💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0b0f19;
-            --surface: #131b2e;
-            --surface-glass: rgba(19, 27, 46, 0.75);
-            --primary: #e0a96d;
-            --primary-glow: rgba(224, 169, 109, 0.25);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: rgba(224, 169, 109, 0.2);
+            --primary: #ff4d6d;
+            --secondary: #ff758f;
+            --light-pink: #ffe5ec;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #2b2d42;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             user-select: none;
         }
 
         body {
-            background-color: var(--bg-deep);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(224, 169, 109, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(100, 116, 139, 0.08) 0%, transparent 40%);
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c1 100%);
             min-height: 100vh;
-            color: var(--text-main);
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 30px 20px;
+            padding: 20px;
             overflow-x: hidden;
         }
 
-        .ambient-glow {
+        /* Floating Hearts */
+        .floating-hearts {
             position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(224, 169, 109, 0.03) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
         }
 
+        .heart {
+            position: absolute;
+            background: rgba(255, 77, 109, 0.25);
+            width: 20px;
+            height: 20px;
+            transform: rotate(45deg);
+            animation: floatUp 7s infinite linear;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 77, 109, 0.25);
+        }
+
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { top: 0; left: -10px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) rotate(45deg) scale(0.6); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(45deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Container */
         .wrapper {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 750px;
+            max-width: 650px;
+            margin: 20px auto;
         }
 
-        /* Top Progress & Chapter Header */
-        .header-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .progress-track {
+        /* Progress Bar */
+        .progress-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            height: 4px;
-            border-radius: 2px;
-            margin-bottom: 35px;
+            background: rgba(255, 255, 255, 0.6);
+            height: 12px;
+            border-radius: 6px;
+            margin-bottom: 25px;
             overflow: hidden;
+            padding: 2px;
         }
 
-        .progress-fill {
+        .progress-bar {
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
             width: 12.5%;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.5s ease;
+            border-radius: 5px;
         }
 
-        /* Card Container */
-        .chapter-card {
+        /* Card Stage */
+        .stage-card {
             display: none;
-            background: var(--surface-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 45px 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.25);
+            text-align: center;
+            border: 3px solid #ffffff;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .chapter-card.active {
+        .stage-card.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
+            font-family: 'Sacramento', cursive;
+            font-size: 4rem;
             color: var(--primary);
-            margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         h2 {
-            font-size: 1.25rem;
-            color: var(--text-main);
+            font-size: 1.6rem;
+            color: #3a0ca3;
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 700;
         }
 
         p {
             font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 25px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #4a4e69;
         }
 
-        .highlight-box {
-            background: rgba(224, 169, 109, 0.05);
-            border-left: 3px solid var(--primary);
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(255, 77, 109, 0.6);
+        }
+
+        .btn-sec {
+            background: #ffffff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        /* Teddy Delivery */
+        .teddy-box {
+            background: linear-gradient(to bottom, #fff0f3, #ffe3e8);
+            border-radius: 20px;
             padding: 20px;
-            border-radius: 0 12px 12px 0;
-            margin: 25px 0;
-            font-style: italic;
-            color: #cbd5e1;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed #ffb3c1;
         }
 
-        /* Inputs & Textareas */
-        .text-input-group {
-            margin: 25px 0;
+        .teddy-bear {
+            font-size: 5rem;
+            animation: bounce 2s infinite ease-in-out;
         }
 
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+
+        .treats-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .treat-tag {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #d90429;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #ffb3c1;
+        }
+
+        /* Interactive Grid / Scratch Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .love-card {
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+            color: white;
+            padding: 20px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            min-height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .love-card.open {
+            background: white;
+            color: #3a0ca3;
+            border: 2px dashed var(--primary);
+        }
+
+        /* Catch Hearts Game */
+        .game-canvas {
+            position: relative;
+            height: 240px;
+            background: #fff0f3;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 2px dashed #ffb3c1;
+            cursor: pointer;
+        }
+
+        .falling-item {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: fallDown linear forwards;
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-30px); }
+            100% { transform: translateY(260px); }
+        }
+
+        /* Textareas & Inputs */
         textarea {
             width: 100%;
-            height: 140px;
-            background: rgba(11, 15, 25, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 18px;
-            color: var(--text-main);
+            height: 110px;
+            padding: 15px;
+            border: 2px solid #ffb3c1;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
             font-size: 1rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
             resize: none;
             outline: none;
-            transition: border-color 0.3s;
+            background: #fff;
+            margin: 15px 0;
         }
 
         textarea:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
+            box-shadow: 0 0 12px rgba(255, 77, 109, 0.2);
         }
 
-        /* Interactive Selectors / Checkboxes */
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 25px 0;
-        }
-
-        .option-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .option-item:hover {
-            background: rgba(224, 169, 109, 0.05);
-            border-color: rgba(224, 169, 109, 0.3);
-        }
-
-        .option-item.selected {
-            background: rgba(224, 169, 109, 0.1);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Reflection Slider */
-        .slider-wrapper {
-            margin: 35px 0;
-        }
-
-        .slider-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            accent-color: var(--primary);
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            outline: none;
-        }
-
-        /* Buttons */
-        .action-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 35px;
-            gap: 15px;
-        }
-
-        .btn {
-            background: var(--primary);
-            color: #0b0f19;
-            border: none;
-            padding: 14px 32px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px var(--primary-glow);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(224, 169, 109, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Certificate View */
+        /* Certificate */
         .certificate-box {
-            background: linear-gradient(135deg, #131b2e 0%, #0b0f19 100%);
-            border: 2px solid var(--primary);
-            padding: 40px;
+            background: #fff;
+            border: 6px double var(--primary);
+            padding: 25px;
             border-radius: 20px;
-            text-align: center;
-            position: relative;
-            margin: 30px 0;
-            box-shadow: inset 0 0 30px rgba(224, 169, 109, 0.05);
+            margin: 20px 0;
         }
 
         .certificate-box h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-family: 'Sacramento', cursive;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 10px;
+        }
+
+        /* Final Buttons */
+        .final-area {
+            position: relative;
+            height: 110px;
+            margin-top: 20px;
+        }
+
+        #yesBtn {
+            position: absolute;
+            left: 15%;
+            top: 15px;
+            font-size: 1.2rem;
+            padding: 14px 35px;
+            z-index: 10;
+        }
+
+        #noBtn {
+            position: absolute;
+            right: 15%;
+            top: 15px;
+            background: #adb5bd;
+            box-shadow: none;
+            transition: 0.1s ease;
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
+    <div class="floating-hearts" id="heartsBg"></div>
 
     <div class="wrapper">
-        <div class="header-panel">
-            <span id="chapterIndicator">Chapter I of VIII</span>
-            <span>For Siddhi</span>
+        <div class="progress-box">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <div class="progress-track">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <!-- CHAPTER 1: Introduction & Intent -->
-        <div class="chapter-card active" id="chapter1">
-            <h1>Before Everything Else...</h1>
-            <p>Siddhi, I know words right now can feel heavy, repetitive, or like they carry an excuse. You told me not to offer philosophy, and you are entirely right. You deserve clarity, complete accountability, and the space to process everything.</p>
-            <p>I built this space not to rush your feelings or demand quick forgiveness, but to show you how deeply I am reflecting on my mistakes and on what we share.</p>
-            <div class="highlight-box">
-                "Take your time going through this. Every word here is written with total honesty, zero shortcuts, and profound respect for you."
-            </div>
-            <div class="action-row">
-                <button class="btn" onclick="nextChapter()">Begin Reflection ➔</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 2: Acknowledging Mistake One -->
-        <div class="chapter-card" id="chapter2">
-            <h1>On Trust & Transparency</h1>
-            <p>Trust is the absolute foundation of any relationship, especially ours. When I misled you regarding my academic path, telling you BBA LLB instead of BBA simply because we were in related fields, it was rooted in deep insecurity and foolishness.</p>
-            <p>Instead of being completely secure and transparent with you, I chose a shortcut that broke your trust. There is no justification for that.</p>
-            <div class="text-input-group">
-                <p style="font-size: 0.95rem; margin-bottom: 8px; color: var(--text-main);">Siddhi, what does transparency mean to you in a partnership? (Take a moment to reflect or type your thoughts):</p>
-                <textarea placeholder="Write down what you feel here... I want to understand your perspective completely."></textarea>
-            </div>
-            <div class="action-row">
-                <button class="btn btn-outline" onclick="prevChapter()">Back</button>
-                <button class="btn" onclick="nextChapter()">Continue ➔</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 3: Acknowledging Mistake Two -->
-        <div class="chapter-card" id="chapter3">
-            <h1>On Loyalty & Standing By You</h1>
-            <p>A partner's primary duty when someone disrespectures the person they love is immediate, unwavering defense. When my friend spoke ill about you, I failed you. I didn't stand up for you the way you deserved, and my silence or hesitation caused deep hurt.</p>
-            <p>That is something I carry immense regret for. Your dignity and character are non-negotiable, and I failed to protect our boundary.</p>
-            <div class="options-list">
-                <div class="option-item" onclick="selectOption(this)">
-                    <span>1. Silence in the face of disrespect is passive betrayal.</span>
-                </div>
-                <div class="option-item" onclick="selectOption(this)">
-                    <span>2. Defense of your partner must be immediate and absolute.</span>
-                </div>
-                <div class="option-item" onclick="selectOption(this)">
-                    <span>3. Respect and loyalty cannot have conditions or hesitation.</span>
+        <!-- STAGE 1: Teddy & Treats Delivery -->
+        <div class="stage-card active" id="stage1">
+            <h1>Hey Chikooooo... 🧸💖</h1>
+            <p>I know you're upset with me, and you have every right to be. But before anything else, I wanted your personal teddy bear to bring you a special delivery straight to your screen!</p>
+            
+            <div class="teddy-box">
+                <div class="teddy-bear">🧸📦</div>
+                <p style="font-weight: 600; color: #d90429; margin-top: 10px;">Your delivery has arrived safely!</p>
+                <div class="treats-row">
+                    <div class="treat-tag">🍫 Choki Choki</div>
+                    <div class="treat-tag">⭐ Cadbury 5 Star</div>
+                    <div class="treat-tag">🌰 Nutella Jar</div>
                 </div>
             </div>
-            <div class="action-row">
-                <button class="btn btn-outline" onclick="prevChapter()">Back</button>
-                <button class="btn" onclick="nextChapter()">Continue ➔</button>
+
+            <button class="btn" onclick="nextStage()">Open Your Surprise ➔</button>
+        </div>
+
+        <!-- STAGE 2: Mood Check-in Slider -->
+        <div class="stage-card" id="stage2">
+            <h1>How’s my baby feeling? 🥺</h1>
+            <p>Move the slider to let me know how angry or upset you are with me right now:</p>
+            
+            <div style="margin: 30px 0;">
+                <input type="range" id="moodRange" min="1" max="100" value="25" oninput="updateMood()" style="width: 100%; accent-color: var(--primary); height: 8px;">
+                <p id="moodLabel" style="font-weight: 600; color: var(--primary); margin-top: 15px;">Still super mad at you! 😤</p>
+            </div>
+
+            <button class="btn" onclick="nextStage()">Next Part ➔</button>
+        </div>
+
+        <!-- STAGE 3: Memory Quiz -->
+        <div class="stage-card" id="stage3">
+            <h1>Quick Cute Quiz! 💕</h1>
+            <p style="font-weight: 600; color: #3a0ca3;">Let’s test if you remember who loves you the most in this entire universe:</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, false)">A) My own bed</div>
+                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, true)">B) Gavin, who is deeply sorry and loves his Chikooooo endlessly 🥰</div>
+                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="C) Choki Choki">C) Choki Choki</div>
+            </div>
+
+            <p id="quizMsg" style="font-weight: 600; min-height: 25px;"></p>
+            <button class="btn" id="quizNext" style="display: none; margin-top: 10px;" onclick="nextStage()">Continue ➔</button>
+        </div>
+
+        <!-- STAGE 4: Heartfelt Message & Typing Box -->
+        <div class="stage-card" id="stage4">
+            <h1>From My Heart to Yours ✨</h1>
+            <p>Chikooooo, you are my absolute favorite person. I hate seeing you hurt, especially because of my stupid mistakes. I'm so sorry for everything. You deserve all the honesty, loyalty, and love in the world.</p>
+            
+            <p style="font-size: 0.95rem; font-weight: 600; text-align: left; margin-bottom: 5px;">Want to scold me back right here? Type it out:</p>
+            <textarea placeholder="Type whatever is on your mind, Chikooooo... I promise to read every single word."></textarea>
+
+            <button class="btn" onclick="nextStage()">Read My Promises ➔</button>
+        </div>
+
+        <!-- STAGE 5: Tap to Reveal Promises -->
+        <div class="stage-card" id="stage5">
+            <h1>Tap to Open My Promises 💌</h1>
+            <p>Tap each card below to see what I promise you from today onwards:</p>
+
+            <div class="cards-grid">
+                <div class="love-card" onclick="openLoveCard(this, 'I promise to always tell you the truth, no matter what.')">Promise 1 🔓<br><small>(Tap to open)</small></div>
+                <div class="love-card" onclick="openLoveCard(this, 'I promise to always stand by your side and defend you proudly.')">Promise 2 🔓<br><small>(Tap to open)</small></div>
+                <div class="love-card" onclick="openLoveCard(this, 'I promise to listen to you with all my heart without getting defensive.')">Promise 3 🔓<br><small>(Tap to open)</small></div>
+                <div class="love-card" onclick="openLoveCard(this, 'I promise to keep you stocked with endless Choki Choki & Nutella!')">Promise 4 🔓<br><small>(Tap to open)</small></div>
+            </div>
+
+            <button class="btn" style="margin-top: 15px;" onclick="nextStage()">Almost Done! ➔</button>
+        </div>
+
+        <!-- STAGE 6: Catching Hearts Game -->
+        <div class="stage-card" id="stage6">
+            <h1>Catch 5 Hearts for Forgiveness! 💞</h1>
+            <p>Tap the falling hearts to collect them (<span id="scoreCount">0</span>/5):</p>
+
+            <div class="game-canvas" id="gameArea"></div>
+            <button class="btn" id="gameBtn" style="display: none; margin-top: 15px;" onclick="nextStage()">Claim Your Reward ➔</button>
+        </div>
+
+        <!-- STAGE 7: The Final Question -->
+        <div class="stage-card" id="stage7">
+            <h1>Chikooooo... Can you forgive me? 🥺❤️</h1>
+            <p>I know I messed up big time, but my love for you is bigger. Can we press reset and smile together again?</p>
+            
+            <div class="final-area">
+                <button class="btn" id="yesBtn" onclick="celebrateYes()">YES, I Forgive You! 🥰</button>
+                <button class="btn btn-sec" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 🙈</button>
             </div>
         </div>
 
-        <!-- CHAPTER 4: Emotional Check-in -->
-        <div class="chapter-card" id="chapter4">
-            <h1>Emotional Calibration</h1>
-            <p>Your emotional well-being matters more than my discomfort in facing these hard truths. Let me know where your mind is at right now through this reflection meter:</p>
-            <div class="slider-wrapper">
-                <input type="range" id="reflectionSlider" min="1" max="100" value="25" oninput="updateSliderText()">
-                <div class="slider-labels">
-                    <span>Deeply hurt / Processing</span>
-                    <span>Listening & evaluating</span>
-                    <span>Ready to rebuild</span>
-                </div>
-                <p id="sliderStatusText" style="text-align: center; margin-top: 20px; color: var(--primary); font-weight: 500;">Processing heavy emotions and distance...</p>
-            </div>
-            <div class="action-row">
-                <button class="btn btn-outline" onclick="prevChapter()">Back</button>
-                <button class="btn" onclick="nextChapter()">Continue ➔</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 5: Concrete Accountability & Changes -->
-        <div class="chapter-card" id="chapter5">
-            <h1>My Commitment to Change</h1>
-            <p>An apology without changed behavior is just empty words. Here are the concrete changes I am implementing in my life right now:</p>
-            <p>• <strong>Radical Honesty:</strong> Complete transparency in every detail, large or small. No hiding insecurities behind facades.<br>
-            • <strong>Absolute Protection:</strong> Zero tolerance for anyone speaking disrespectfully about you around me. Your honor comes first.<br>
-            • <strong>Active Listening:</strong> Processing your feedback without getting defensive or shutting down.</p>
-            <div class="text-input-group">
-                <p style="font-size: 0.95rem; margin-bottom: 8px; color: var(--text-main);">Is there any boundary or expectation you want to set right now?</p>
-                <textarea placeholder="Write your boundaries or expectations here, Siddhi..."></textarea>
-            </div>
-            <div class="action-row">
-                <button class="btn btn-outline" onclick="prevChapter()">Back</button>
-                <button class="btn" onclick="nextChapter()">Continue ➔</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 6: Remembering What We Share -->
-        <div class="chapter-card" id="chapter6">
-            <h1>The Value of Us</h1>
-            <p>Despite these profound mistakes, the depth of what we share—our laughter, our late-night conversations, our care for one another—is something I value beyond measure. You bring out the absolute best in me, Siddhi.</p>
-            <p>I know rebuilding what was fractured takes time, patience, and consistent actions rather than a single conversation. I am willing to put in every ounce of that effort.</p>
-            <div class="highlight-box">
-                "I am deeply sorry for letting you down, Chikooooo. I want to earn back your complete trust and respect."
-            </div>
-            <div class="action-row">
-                <button class="btn btn-outline" onclick="prevChapter()">Back</button>
-                <button class="btn" onclick="nextChapter()">Final Step ➔</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 7: The Choice -->
-        <div class="chapter-card" id="chapter7">
-            <h1>A Partnership Restored</h1>
-            <p>Siddhi, I leave this entirely in your hands. If you feel ready to take a step toward healing and giving us another chance, I am here, ready to prove myself every single day.</p>
-            <div class="action-row" style="justify-content: center; gap: 20px; margin-top: 40px;">
-                <button class="btn" onclick="nextChapter()" style="padding: 16px 40px; font-size: 1.05rem;">Yes, Let's Rebuild Together 🤍</button>
-                <button class="btn btn-outline" onmouseover="dodgeButton(this)" onclick="dodgeButton(this)">I Need More Time</button>
-            </div>
-        </div>
-
-        <!-- CHAPTER 8: Confirmation & Certificate -->
-        <div class="chapter-card" id="chapter8">
-            <h1>Beginning Anew</h1>
-            <p>Thank you for taking the time to walk through this with me, Siddhi. Your patience means everything.</p>
+        <!-- STAGE 8: Success & Certificate -->
+        <div class="stage-card" id="stage8">
+            <h1>Yayyyyy! 🎉❤️</h1>
+            <p>Thank you for giving us another chance, my gorgeous Chikooooo. I promise I will never give you a reason to doubt me again.</p>
             
             <div class="certificate-box">
-                <h3>Record of Reflection & Renewal</h3>
-                <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">This document signifies that</p>
-                <h2 style="color: var(--primary); margin: 8px 0; font-family: 'Cinzel', serif;">Siddhi (Chikooooo)</h2>
-                <p style="font-size: 0.95rem; color: var(--text-muted);">has completed the reflection journey, established accountability, and chosen to move forward toward healing and growth.</p>
+                <h3>Official Certificate of Forgiveness</h3>
+                <p style="margin-top: 10px;">This certificate proudly confirms that</p>
+                <h2 style="color: var(--primary); margin: 5px 0;">Siddhi (Chikooooo)</h2>
+                <p style="font-size: 0.95rem;">has officially forgiven her favorite boy and unlocked unlimited cuddles, Choki Choki, Cadbury 5 Star, Nutella, and endless love! 🧸✨</p>
             </div>
 
-            <p style="text-align: center; color: var(--primary); font-weight: 500; margin-top: 20px;">Take a screenshot of this page and send it to me. Let's start fresh. ❤️</p>
+            <p style="font-weight: 600; color: var(--primary);">Take a screenshot of this and send it to me right now! I love you so much! ❤️</p>
         </div>
-
     </div>
 
     <script>
-        let currentChapter = 1;
-        const totalChapters = 8;
+        let currentStage = 1;
+        const totalStages = 8;
 
         function updateProgress() {
-            const progress = (currentChapter / totalChapters) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('chapterIndicator').innerText = `Chapter ${getRomanNumeral(currentChapter)} of VIII`;
+            let pct = (currentStage / totalStages) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
         }
 
-        function nextChapter() {
-            document.getElementById('chapter' + currentChapter).classList.remove('active');
-            currentChapter++;
-            if(currentChapter <= totalChapters) {
-                document.getElementById('chapter' + currentChapter).classList.add('active');
+        function nextStage() {
+            document.getElementById('stage' + currentStage).classList.remove('active');
+            currentStage++;
+            if(currentStage <= totalStages) {
+                document.getElementById('stage' + currentStage).classList.add('active');
                 updateProgress();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                if(currentStage === 6) startHeartGame();
             }
         }
 
-        function prevChapter() {
-            document.getElementById('chapter' + currentChapter).classList.remove('active');
-            currentChapter--;
-            if(currentChapter >= 1) {
-                document.getElementById('chapter' + currentChapter).classList.add('active');
-                updateProgress();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+        // Floating Hearts Background
+        const heartsBg = document.getElementById('heartsBg');
+        for(let i=0; i<15; i++) {
+            let h = document.createElement('div');
+            h.className = 'heart';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = Math.random() * 100 + 'vh';
+            h.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            h.style.animationDelay = (Math.random() * 5) + 's';
+            heartsBg.appendChild(h);
         }
 
-        function getRomanNumeral(num) {
-            const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
-            return roman[num - 1] || num;
+        // Mood Slider
+        function updateMood() {
+            let val = document.getElementById('moodRange').value;
+            let lbl = document.getElementById('moodLabel');
+            if(val < 30) lbl.innerText = "Still super mad at you! 😤";
+            else if(val < 70) lbl.innerText = "Listening, but still skeptical... 🙂";
+            else lbl.innerText = "Starting to melt and forgive! 🥰";
         }
 
-        function selectOption(el) {
-            document.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
-            el.classList.add('selected');
-        }
-
-        function updateSliderText() {
-            const val = document.getElementById('reflectionSlider').value;
-            const status = document.getElementById('sliderStatusText');
-            if(val < 35) {
-                status.innerText = "Processing heavy emotions and distance...";
-            } else if(val < 75) {
-                status.innerText = "Listening, evaluating actions, and weighing things out.";
+        // Quiz check
+        function checkQuiz(el, correct) {
+            let msg = document.getElementById('quizMsg');
+            if(correct) {
+                el.style.background = '#d8f3dc';
+                el.style.borderColor = '#52b788';
+                msg.style.color = '#2b9348';
+                msg.innerText = "Yay! You know it, my Chikooooo! ❤️";
+                document.getElementById('quizNext').style.display = 'inline-block';
             } else {
-                status.innerText = "Willing to listen, communicate, and consider moving forward.";
+                el.style.background = '#ffe5ec';
+                el.style.borderColor = '#d90429';
+                msg.style.color = '#d90429';
+                msg.innerText = "Wrong choice! Try option B! 🧸";
             }
         }
 
-        function dodgeButton(btn) {
-            const x = (Math.random() - 0.5) * 160;
-            const y = (Math.random() - 0.5) * 60;
+        // Open love cards
+        function openLoveCard(card, text) {
+            card.classList.add('open');
+            card.innerHTML = text;
+        }
+
+        // Heart catching game
+        let score = 0;
+        let gameTimer;
+        function startHeartGame() {
+            score = 0;
+            document.getElementById('scoreCount').innerText = score;
+            let area = document.getElementById('gameArea');
+            area.innerHTML = '';
+
+            gameTimer = setInterval(() => {
+                if(score >= 5) {
+                    clearInterval(gameTimer);
+                    return;
+                }
+                let h = document.createElement('div');
+                h.className = 'falling-item';
+                h.innerHTML = '❤️';
+                h.style.left = Math.random() * (area.offsetWidth - 40) + 'px';
+                h.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+
+                h.onclick = () => {
+                    score++;
+                    document.getElementById('scoreCount').innerText = score;
+                    h.remove();
+                    if(score >= 5) {
+                        area.innerHTML = "<h3 style='color: #2b9348; margin-top: 90px;'>All hearts collected! 🎉</h3>";
+                        document.getElementById('gameBtn').style.display = 'inline-block';
+                    }
+                };
+
+                area.appendChild(h);
+                setTimeout(() => { if(h.parentElement) h.remove(); }, 3500);
+            }, 700);
+        }
+
+        // Move No button
+        function moveNo() {
+            let btn = document.getElementById('noBtn');
+            let x = (Math.random() - 0.5) * 180;
+            let y = (Math.random() - 0.5) * 80;
             btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function celebrateYes() {
+            nextStage();
+            for(let i=0; i<30; i++) {
+                let h = document.createElement('div');
+                h.className = 'heart';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.top = -10 + 'px';
+                h.style.background = '#ff4d6d';
+                h.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                heartsBg.appendChild(h);
+            }
         }
     </script>
 </body>
