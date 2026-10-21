@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* Floating Hearts */
         .floating-hearts {
             position: fixed;
             top: 0;
@@ -73,7 +72,6 @@
             100% { transform: translateY(-10vh) rotate(45deg) scale(1.2); opacity: 0; }
         }
 
-        /* Container */
         .wrapper {
             position: relative;
             z-index: 10;
@@ -82,7 +80,6 @@
             margin: 20px auto;
         }
 
-        /* Progress Bar */
         .progress-box {
             width: 100%;
             background: rgba(255, 255, 255, 0.6);
@@ -101,7 +98,6 @@
             border-radius: 5px;
         }
 
-        /* Card Stage */
         .stage-card {
             display: none;
             background: var(--card-bg);
@@ -145,7 +141,6 @@
             color: #4a4e69;
         }
 
-        /* Buttons */
         .btn {
             background: linear-gradient(135deg, #ff4d6d, #ff758f);
             color: white;
@@ -172,7 +167,6 @@
             box-shadow: none;
         }
 
-        /* Teddy Delivery */
         .teddy-box {
             background: linear-gradient(to bottom, #fff0f3, #ffe3e8);
             border-radius: 20px;
@@ -212,7 +206,6 @@
             border: 1px solid #ffb3c1;
         }
 
-        /* Interactive Grid / Scratch Cards */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -243,7 +236,6 @@
             border: 2px dashed var(--primary);
         }
 
-        /* Catch Hearts Game */
         .game-canvas {
             position: relative;
             height: 240px;
@@ -267,7 +259,6 @@
             100% { transform: translateY(260px); }
         }
 
-        /* Textareas & Inputs */
         textarea {
             width: 100%;
             height: 110px;
@@ -287,7 +278,6 @@
             box-shadow: 0 0 12px rgba(255, 77, 109, 0.2);
         }
 
-        /* Certificate */
         .certificate-box {
             background: #fff;
             border: 6px double var(--primary);
@@ -302,7 +292,6 @@
             color: var(--primary);
         }
 
-        /* Final Buttons */
         .final-area {
             position: relative;
             height: 110px;
@@ -376,7 +365,7 @@
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
                 <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, false)">A) My own bed</div>
                 <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, true)">B) Gavin, who is deeply sorry and loves his Chikooooo endlessly 🥰</div>
-                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="C) Choki Choki">C) Choki Choki</div>
+                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, false)">C) Choki Choki</div>
             </div>
 
             <p id="quizMsg" style="font-weight: 600; min-height: 25px;"></p>
@@ -465,7 +454,6 @@
             }
         }
 
-        // Floating Hearts Background
         const heartsBg = document.getElementById('heartsBg');
         for(let i=0; i<15; i++) {
             let h = document.createElement('div');
@@ -477,7 +465,6 @@
             heartsBg.appendChild(h);
         }
 
-        // Mood Slider
         function updateMood() {
             let val = document.getElementById('moodRange').value;
             let lbl = document.getElementById('moodLabel');
@@ -486,7 +473,6 @@
             else lbl.innerText = "Starting to melt and forgive! 🥰";
         }
 
-        // Quiz check
         function checkQuiz(el, correct) {
             let msg = document.getElementById('quizMsg');
             if(correct) {
@@ -503,13 +489,11 @@
             }
         }
 
-        // Open love cards
         function openLoveCard(card, text) {
             card.classList.add('open');
             card.innerHTML = text;
         }
 
-        // Heart catching game
         let score = 0;
         let gameTimer;
         function startHeartGame() {
@@ -544,7 +528,6 @@
             }, 700);
         }
 
-        // Move No button
         function moveNo() {
             let btn = document.getElementById('noBtn');
             let x = (Math.random() - 0.5) * 180;
