@@ -10,7 +10,7 @@
             --primary: #ff4d6d;
             --secondary: #ff758f;
             --light-pink: #ffe5ec;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.96);
             --text-color: #2b2d42;
         }
 
@@ -76,7 +76,7 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             margin: 20px auto;
         }
 
@@ -93,7 +93,7 @@
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, #ff4d6d, #ff758f);
-            width: 12.5%;
+            width: 11%;
             transition: width 0.5s ease;
             border-radius: 5px;
         }
@@ -121,14 +121,14 @@
 
         h1 {
             font-family: 'Sacramento', cursive;
-            font-size: 4rem;
+            font-size: 3.8rem;
             color: var(--primary);
             margin-bottom: 10px;
-            line-height: 1;
+            line-height: 1.1;
         }
 
         h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #3a0ca3;
             margin-bottom: 20px;
             font-weight: 700;
@@ -167,45 +167,88 @@
             box-shadow: none;
         }
 
+        /* Teddy Delivery */
         .teddy-box {
             background: linear-gradient(to bottom, #fff0f3, #ffe3e8);
             border-radius: 20px;
             padding: 20px;
             margin: 20px 0;
-            position: relative;
-            overflow: hidden;
             border: 2px dashed #ffb3c1;
         }
 
         .teddy-bear {
-            font-size: 5rem;
+            font-size: 4.5rem;
             animation: bounce 2s infinite ease-in-out;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
         }
 
         .treats-row {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
 
         .treat-tag {
             background: white;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #d90429;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border: 1px solid #ffb3c1;
         }
 
+        /* Claw Machine Game */
+        .claw-cabinet {
+            background: #1d3557;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 4px solid #457b9d;
+        }
+
+        .claw-area {
+            height: 180px;
+            background: #f1faee;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-bottom: 15px;
+        }
+
+        .toy-item {
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .toy-item:hover {
+            transform: scale(1.2);
+        }
+
+        .claw-arm {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            transition: top 0.8s ease;
+        }
+
+        /* Interactive Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -225,7 +268,7 @@
             justify-content: center;
             text-align: center;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);
             transition: transform 0.3s;
         }
@@ -236,6 +279,7 @@
             border: 2px dashed var(--primary);
         }
 
+        /* Catch Hearts Game */
         .game-canvas {
             position: relative;
             height: 240px;
@@ -326,14 +370,14 @@
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <!-- STAGE 1: Teddy & Treats Delivery -->
+        <!-- STAGE 1: Welcome & Teddy Delivery -->
         <div class="stage-card active" id="stage1">
             <h1>Hey Chikooooo... 🧸💖</h1>
-            <p>I know you're upset with me, and you have every right to be. But before anything else, I wanted your personal teddy bear to bring you a special delivery straight to your screen!</p>
+            <p>I know things have been difficult and you're upset with me. I built this massive interactive journey just for you—take your time, relax, and walk through it step-by-step.</p>
             
             <div class="teddy-box">
                 <div class="teddy-bear">🧸📦</div>
-                <p style="font-weight: 600; color: #d90429; margin-top: 10px;">Your delivery has arrived safely!</p>
+                <p style="font-weight: 600; color: #d90429; margin-top: 10px;">Your special treat delivery has arrived!</p>
                 <div class="treats-row">
                     <div class="treat-tag">🍫 Choki Choki</div>
                     <div class="treat-tag">⭐ Cadbury 5 Star</div>
@@ -344,7 +388,7 @@
             <button class="btn" onclick="nextStage()">Open Your Surprise ➔</button>
         </div>
 
-        <!-- STAGE 2: Mood Check-in Slider -->
+        <!-- STAGE 2: Mood Calibration Slider -->
         <div class="stage-card" id="stage2">
             <h1>How’s my baby feeling? 🥺</h1>
             <p>Move the slider to let me know how angry or upset you are with me right now:</p>
@@ -357,14 +401,33 @@
             <button class="btn" onclick="nextStage()">Next Part ➔</button>
         </div>
 
-        <!-- STAGE 3: Memory Quiz -->
+        <!-- STAGE 3: CLAW MACHINE MINI-GAME -->
         <div class="stage-card" id="stage3">
+            <h1>Play the Claw Game! 🧸🕹️</h1>
+            <p>Grab 3 cute soft toys using the claw to unlock the next chapter (<span id="toysCount">0</span>/3 grabbed):</p>
+
+            <div class="claw-cabinet">
+                <div class="claw-area" id="clawArea">
+                    <div class="claw-arm" id="clawArm">🦾</div>
+                    <div class="toy-item" onclick="grabToy(this)">🐼</div>
+                    <div class="toy-item" onclick="grabToy(this)">🧸</div>
+                    <div class="toy-item" onclick="grabToy(this)">🐰</div>
+                    <div class="toy-item" onclick="grabToy(this)">🐨</div>
+                </div>
+                <p id="clawMsg" style="margin-top: 10px; font-size: 0.9rem; color: #a8dadc;">Click on the soft toys to grab them!</p>
+            </div>
+
+            <button class="btn" id="clawNextBtn" style="display: none;" onclick="nextStage()">Continue Journey ➔</button>
+        </div>
+
+        <!-- STAGE 4: Memory Quiz -->
+        <div class="stage-card" id="stage4">
             <h1>Quick Cute Quiz! 💕</h1>
-            <p style="font-weight: 600; color: #3a0ca3;">Let’s test if you remember who loves you the most in this entire universe:</p>
+            <p style="font-weight: 600; color: #3a0ca3;">Let’s test if you remember who loves you endlessly:</p>
             
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
                 <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, false)">A) My own bed</div>
-                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, true)">B) Gavin, who is deeply sorry and loves his Chikooooo endlessly 🥰</div>
+                <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, true)">B) Gavin, who is deeply sorry and loves his Chikooooo forever 🥰</div>
                 <div style="background: white; border: 2px solid #ffb3c1; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 500;" onclick="checkQuiz(this, false)">C) Choki Choki</div>
             </div>
 
@@ -372,19 +435,19 @@
             <button class="btn" id="quizNext" style="display: none; margin-top: 10px;" onclick="nextStage()">Continue ➔</button>
         </div>
 
-        <!-- STAGE 4: Heartfelt Message & Typing Box -->
-        <div class="stage-card" id="stage4">
+        <!-- STAGE 5: Heartfelt Message & Typing Box -->
+        <div class="stage-card" id="stage5">
             <h1>From My Heart to Yours ✨</h1>
-            <p>Chikooooo, you are my absolute favorite person. I hate seeing you hurt, especially because of my stupid mistakes. I'm so sorry for everything. You deserve all the honesty, loyalty, and love in the world.</p>
+            <p>Chikooooo, you are my absolute safe space. I hate seeing you hurt, especially because of my stupid mistakes. I'm so sorry. You deserve complete honesty, absolute loyalty, and all my love.</p>
             
             <p style="font-size: 0.95rem; font-weight: 600; text-align: left; margin-bottom: 5px;">Want to scold me back right here? Type it out:</p>
-            <textarea placeholder="Type whatever is on your mind, Chikooooo... I promise to read every single word."></textarea>
+            <textarea placeholder="Type whatever is on your mind, Chikooooo... I'm reading every word."></textarea>
 
             <button class="btn" onclick="nextStage()">Read My Promises ➔</button>
         </div>
 
-        <!-- STAGE 5: Tap to Reveal Promises -->
-        <div class="stage-card" id="stage5">
+        <!-- STAGE 6: Tap to Reveal Promises -->
+        <div class="stage-card" id="stage6">
             <h1>Tap to Open My Promises 💌</h1>
             <p>Tap each card below to see what I promise you from today onwards:</p>
 
@@ -398,8 +461,8 @@
             <button class="btn" style="margin-top: 15px;" onclick="nextStage()">Almost Done! ➔</button>
         </div>
 
-        <!-- STAGE 6: Catching Hearts Game -->
-        <div class="stage-card" id="stage6">
+        <!-- STAGE 7: Catching Hearts Game -->
+        <div class="stage-card" id="stage7">
             <h1>Catch 5 Hearts for Forgiveness! 💞</h1>
             <p>Tap the falling hearts to collect them (<span id="scoreCount">0</span>/5):</p>
 
@@ -407,8 +470,8 @@
             <button class="btn" id="gameBtn" style="display: none; margin-top: 15px;" onclick="nextStage()">Claim Your Reward ➔</button>
         </div>
 
-        <!-- STAGE 7: The Final Question -->
-        <div class="stage-card" id="stage7">
+        <!-- STAGE 8: The Final Question -->
+        <div class="stage-card" id="stage8">
             <h1>Chikooooo... Can you forgive me? 🥺❤️</h1>
             <p>I know I messed up big time, but my love for you is bigger. Can we press reset and smile together again?</p>
             
@@ -418,8 +481,8 @@
             </div>
         </div>
 
-        <!-- STAGE 8: Success & Certificate -->
-        <div class="stage-card" id="stage8">
+        <!-- STAGE 9: Success & Certificate -->
+        <div class="stage-card" id="stage9">
             <h1>Yayyyyy! 🎉❤️</h1>
             <p>Thank you for giving us another chance, my gorgeous Chikooooo. I promise I will never give you a reason to doubt me again.</p>
             
@@ -436,7 +499,7 @@
 
     <script>
         let currentStage = 1;
-        const totalStages = 8;
+        const totalStages = 9;
 
         function updateProgress() {
             let pct = (currentStage / totalStages) * 100;
@@ -450,7 +513,7 @@
                 document.getElementById('stage' + currentStage).classList.add('active');
                 updateProgress();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                if(currentStage === 6) startHeartGame();
+                if(currentStage === 7) startHeartGame();
             }
         }
 
@@ -471,6 +534,21 @@
             if(val < 30) lbl.innerText = "Still super mad at you! 😤";
             else if(val < 70) lbl.innerText = "Listening, but still skeptical... 🙂";
             else lbl.innerText = "Starting to melt and forgive! 🥰";
+        }
+
+        // Claw Machine Logic
+        let toysGrabbed = 0;
+        function grabToy(toy) {
+            if(toy.style.opacity === '0.3') return;
+            toysGrabbed++;
+            document.getElementById('toysCount').innerText = toysGrabbed;
+            toy.style.opacity = '0.3';
+            toy.style.transform = 'translateY(-40px)';
+            
+            if(toysGrabbed >= 3) {
+                document.getElementById('clawMsg').innerText = "Awesome! You won all 3 soft toys! 🎉";
+                document.getElementById('clawNextBtn').style.display = 'inline-block';
+            }
         }
 
         function checkQuiz(el, correct) {
